@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% set title = "Login | Secure Mobile Banking" %}
+{% block content %}
+
+<div class="hero">
+  <div class="card tilt">
+    <div class="shine"></div>
+    <h2 class="title" style="font-size:30px;">Sign in</h2>
+    <p class="subtitle">
+      Security-first login: password verification + M-PIN verification.
+      Failed login attempts are tracked and temporarily locked.
+    </p>
+
+    <form class="form" method="POST" action="{{ url_for('login') }}">
+      <input type="hidden" name="csrf" value="{{ csrf }}">
+
+      <div class="field">
+        <label>Email</label>
+        <div class="inputwrap">
+          <input name="email" placeholder="you@example.com" required>
+        </div>
+      </div>
+
+      <div class="grid2">
+        <div class="field">
+          <label>Password</label>
+          <div class="inputwrap">
+            <input id="password2" name="password" type="password" placeholder="Your password" required>
+            <button type="button" class="iconbtn" id="pwToggle2">Show</button>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>M-PIN</label>
+          <div class="inputwrap">
+            <input name="mpin" inputmode="numeric" maxlength="4" placeholder="1234" required>
+          </div>
+        </div>
+      </div>
+
+      <button class="btn primary" type="submit">Login</button>
+
+      <p class="helper">
+        New here? <a href="{{ url_for('register') }}" style="color:rgba(34,211,238,.95); text-decoration:none;">Create account</a>
+      </p>
+    </form>
+  </div>
+
+  <div class="card tilt">
+    <div class="shine"></div>
+    <p class="section-title">Security highlights</p>
+
+    <div class="kpis">
+      <div class="kpi">
+        <p class="big">CSRF Protected</p>
+        <p class="small">Form submission is validated</p>
+      </div>
+      <div class="kpi">
+        <p class="big">Lockout Policy</p>
+        <p class="small">Abuse prevention on failures</p>
+      </div>
+      <div class="kpi">
+        <p class="big">Session Security</p>
+        <p class="small">HttpOnly cookies enabled</p>
+      </div>
+    </div>
+
+    <p class="footnote">
+      Tip: In production, enable <code>SESSION_COOKIE_SECURE</code> with HTTPS.
+    </p>
+  </div>
+</div>
+
+{% endblock %}

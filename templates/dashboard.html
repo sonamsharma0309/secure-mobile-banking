@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% set title = "Dashboard | Secure Mobile Banking" %}
+{% block content %}
+
+<div class="hero">
+  <div class="card tilt">
+    <div class="shine"></div>
+    <h2 class="title" style="font-size:30px;">Welcome, {{ current_user.full_name }}</h2>
+    <p class="subtitle">
+      This dashboard loads recent activity dynamically from the database via <code>/api/transactions</code>.
+      Sensitive details remain masked.
+    </p>
+
+    <div class="kpis" style="margin-top:16px;">
+      <div class="kpi">
+        <p class="big">₹ {{ balance }}</p>
+        <p class="small">Available Balance (dynamic demo)</p>
+      </div>
+      <div class="kpi">
+        <p class="big">{{ card_masked }}</p>
+        <p class="small">Linked Card (masked)</p>
+      </div>
+      <div class="kpi">
+        <p class="big">Privacy Mode</p>
+        <p class="small">Zero plaintext sensitive fields</p>
+      </div>
+    </div>
+
+    <hr class="sep"/>
+
+    <p class="section-title">Spending pulse (demo)</p>
+    <div class="sparkline">
+      <canvas id="spark"></canvas>
+    </div>
+    <div class="helper" style="margin-top:8px;" id="txHint">Syncing…</div>
+
+    <hr class="sep"/>
+
+    <p class="section-title">Recent Activity (Live)</p>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Merchant</th>
+          <th>Amount</th>
+          <th>Status</th>
+          <th>Time</th>
+        </tr>
+      </thead>
+      <tbody id="txBody">
+        <tr><td colspan="5">Loading…</td></tr>
+      </tbody>
+    </table>
+
+    <p class="footnote">
+      All transaction rows are fetched as JSON and rendered client-side for a modern “app-like” experience.
+    </p>
+  </div>
+
+  <div class="card tilt">
+    <div class="shine"></div>
+    <p class="section-title">Security report</p>
+    <p class="subtitle">
+      ✅ Password stored as <b>scrypt hash</b><br/>
+      ✅ M-PIN stored as <b>scrypt hash</b><br/>
+      ✅ Card stored as <b>encrypted ciphertext</b><br/>
+      ✅ UI shows only last 4 digits
+    </p>
+
+    <hr class="sep"/>
+
+    <p class="section-title">Viva-ready statement</p>
+    <p class="subtitle">
+      Hashing protects authentication secrets (one-way). Encryption protects recoverable data (card) at rest.
+      This design prevents database leakage from exposing customer secrets.
+    </p>
+
+    <p class="footnote">
+      Pro move: keep <code>instance/</code> ignored in Git to avoid leaking keys.
+    </p>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% set title = "Register | Secure Mobile Banking" %}
+{% block content %}
+
+<div class="hero">
+  <div class="card tilt">
+    <div class="shine"></div>
+    <h2 class="title" style="font-size:30px;">Create an account</h2>
+    <p class="subtitle">
+      Your card number is stored <b>encrypted</b>. Password and M-PIN are stored <b>hashed</b>.
+      This system stores <b>zero plaintext sensitive data</b>.
+    </p>
+
+    <form class="form" method="POST" action="{{ url_for('register') }}">
+      <input type="hidden" name="csrf" value="{{ csrf }}">
+
+      <div class="field">
+        <label>Full Name</label>
+        <div class="inputwrap">
+          <input name="full_name" placeholder="e.g., Sonam Sharma" required>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Email</label>
+        <div class="inputwrap">
+          <input name="email" placeholder="you@example.com" required>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Password (Upper + Lower + Digit + Special)</label>
+        <div class="inputwrap">
+          <input id="password" name="password" type="password" placeholder="Example@123" required>
+          <button type="button" class="iconbtn" id="pwToggle">Show</button>
+        </div>
+
+        <div style="margin-top:10px;">
+          <div class="meter"><div id="pwBar"></div></div>
+          <div class="helper" style="margin-top:6px;">Strength: <span id="pwText">Type password</span></div>
+        </div>
+      </div>
+
+      <div class="grid2">
+        <div class="field">
+          <label>M-PIN (4 digits)</label>
+          <div class="inputwrap">
+            <input name="mpin" inputmode="numeric" maxlength="4" placeholder="1234" required>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Card Number (16 digits)</label>
+          <div class="inputwrap">
+            <input id="card_number" name="card_number" inputmode="numeric" placeholder="1234 5678 1234 5678" required>
+          </div>
+          <div class="helper" style="margin-top:6px;">Auto-format enabled. Digits are stored encrypted.</div>
+        </div>
+      </div>
+
+      <button class="btn primary" type="submit">Register Securely</button>
+
+      <p class="helper">
+        Already registered? <a href="{{ url_for('login') }}" style="color:rgba(34,211,238,.95); text-decoration:none;">Sign in</a>
+      </p>
+    </form>
+  </div>
+
+  <div class="card tilt">
+    <div class="shine"></div>
+    <p class="section-title">Compliance-ready rules</p>
+    <p class="subtitle">
+      ✅ Card must be <b>16 digits numeric</b><br/>
+      ✅ M-PIN must be <b>4 digits numeric</b><br/>
+      ✅ Password must pass <b>strength policy</b><br/>
+      ✅ DB stores: <b>hashes</b> + <b>ciphertext</b> only
+    </p>
+
+    <hr class="sep"/>
+
+    <p class="section-title">Data at rest</p>
+    <p class="subtitle">
+      Card number is encrypted before persistence. Even if someone sees the database file, they cannot read it without the key.
+    </p>
+
+    <p class="footnote">
+      Strong security note for viva: “We store secrets in <code>instance/</code> and avoid committing them to Git.”
+    </p>
+  </div>
+</div>
+
+{% endblock %}

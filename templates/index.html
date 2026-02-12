@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% set title = "Welcome | Secure Mobile Banking" %}
+{% block content %}
+
+<div class="hero">
+  <div class="card tilt">
+    <div class="shine"></div>
+    <h2 class="title">Welcome to <br/>Secure Mobile Banking</h2>
+    <p class="subtitle">
+      A bank-grade privacy demo where <b>passwords and M-PIN are hashed</b> (one-way),
+      and <b>card number is encrypted</b> (ciphertext stored in database).
+      The interface reveals only masked values — no plaintext leakage.
+    </p>
+
+    <div class="badge-row">
+      <div class="badge">🔐 Password: scrypt hash</div>
+      <div class="badge">🧾 Card: encrypted at rest</div>
+      <div class="badge">📌 M-PIN: scrypt hash</div>
+      <div class="badge">🛡️ CSRF protected</div>
+      <div class="badge">⚡ Dynamic dashboard</div>
+      <div class="badge">🚫 Plaintext: none</div>
+    </div>
+
+    <hr class="sep"/>
+
+    <div style="display:flex; gap:10px; flex-wrap:wrap;">
+      <a class="btn primary" href="{{ url_for('register') }}">Create Secure Account</a>
+      <a class="btn" href="{{ url_for('login') }}">Sign In</a>
+      <a class="btn ghost" href="{{ url_for('login') }}">Explore Demo</a>
+    </div>
+
+    <p class="footnote">
+      Presentation line: <b>Hash is one-way</b> (password/mpin). <b>Encryption is reversible</b> (card) using a key.
+      Keys are managed under <code>instance/</code>.
+    </p>
+  </div>
+
+  <div class="card tilt">
+    <div class="shine"></div>
+    <p class="section-title">Security posture</p>
+
+    <div class="kpis">
+      <div class="kpi">
+        <p class="big">Encrypted Storage</p>
+        <p class="small">Card saved as ciphertext bytes</p>
+      </div>
+      <div class="kpi">
+        <p class="big">Credential Hashing</p>
+        <p class="small">scrypt for password + M-PIN</p>
+      </div>
+      <div class="kpi">
+        <p class="big">Abuse Protection</p>
+        <p class="small">Login attempts tracked + lock</p>
+      </div>
+    </div>
+
+    <hr class="sep"/>
+
+    <p class="section-title">What your teacher wants</p>
+    <p class="subtitle">
+      ✅ 16-digit card validation <br/>
+      ✅ 4-digit M-PIN validation <br/>
+      ✅ Strong password rules <br/>
+      ✅ Data privacy at rest + secure sessions
+    </p>
+  </div>
+</div>
+
+{% endblock %}
