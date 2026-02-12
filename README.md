@@ -54,7 +54,7 @@ This system ensures:
 
 - All forms protected with session-based CSRF tokens
 
----
+```base
 
 # 🧠 System Architecture
 
@@ -72,7 +72,7 @@ Security Layer (security.py)
 ▼
 Database (SQLite via SQLAlchemy)
 
-
+```
 ---
 
 # 🎨 UI Features
@@ -109,19 +109,7 @@ secure-mobile-banking/
 ├── login.html
 └── dashboard.html
 ```
-# 📸 Application Screenshots
 
-## 🏠 Home Page
-![Home](screenshots/home.png)
-
-## 📝 Registration Page
-![Register](screenshots/register.png)
-
-## 🔐 Login Page
-![Login](screenshots/login.png)
-
-## 📊 Dashboard
-![Dashboard](screenshots/dashboard.png)
 
 ---
 
